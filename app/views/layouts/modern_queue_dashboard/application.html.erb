@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ModernQueueDashboard</title>
+    <%= csp_meta_tag %>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag "modern_queue_dashboard", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "modern_queue_dashboard", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body class="bg-gray-100 min-h-screen">
+    <%= yield %>
+  </body>
+</html> 
