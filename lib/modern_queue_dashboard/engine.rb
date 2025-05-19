@@ -2,6 +2,7 @@
 
 require "rails/engine"
 require "tailwindcss-rails" if defined?(TailwindCss)
+require "pagy"
 
 module ModernQueueDashboard
   class Engine < ::Rails::Engine
@@ -21,6 +22,16 @@ module ModernQueueDashboard
       if defined?(TailwindCss) && app.config.respond_to?(:tailwindcss)
         app.config.tailwindcss.content_root = root.join("app").to_s
         app.config.tailwindcss.content_includes = [ "./views/**/*.html.erb", "./helpers/**/*.rb" ]
+      end
+    end
+
+    initializer "modern_queue_dashboard.include_pagy_module" do
+      ActiveSupport.on_load :action_controller_base do
+        include Pagy::Backend
+      end
+
+      ActiveSupport.on_load :action_view do
+        include Pagy::Frontend
       end
     end
   end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    modern_queue_dashboard (0.3.1)
+    modern_queue_dashboard (0.4.1)
       rails (~> 8.0, >= 8.0.0)
       solid_queue (~> 1.1)
       tailwindcss-rails (~> 4.0)

@@ -1,7 +1,7 @@
 {
   "name": "modern_queue_dashboard",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "Dashboard for Rails Solid Queue jobs",
   "scripts": {
     "build:css": "tailwindcss -i ./app/assets/stylesheets/modern_queue_dashboard.css -o ./app/assets/builds/modern_queue_dashboard.css --minify",

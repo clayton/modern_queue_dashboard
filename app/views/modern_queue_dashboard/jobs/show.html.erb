@@ -1,0 +1,102 @@
+<div class="container mx-auto p-6 space-y-6">
+  <h1 class="text-3xl font-semibold">Job Details</h1>
+
+  <div class="flex items-center space-x-2 mb-4">
+    <%= link_to "← Back to Queue", queue_path(@queue_name), class: "text-blue-500" %>
+  </div>
+
+  <% if @job_stat %>
+    <!-- Job Overview Card -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <div class="border-b border-gray-200 pb-4 mb-4">
+        <h2 class="text-2xl font-semibold">Job #<%= @job_stat.id %></h2>
+        <p class="text-gray-600"><%= @job_stat.class_name %></p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg font-medium mb-3">Job Information</h3>
+          
+          <div class="space-y-3">
+            <div>
+              <p class="text-sm text-gray-500">Status</p>
+              <% status_style = case @job_stat.status
+                 when 'completed' then 'bg-green-50 text-green-700 ring-1 ring-green-600/20 ring-inset'
+                 when 'running' then 'bg-blue-50 text-blue-700 ring-1 ring-blue-700/10 ring-inset'
+                 when 'scheduled' then 'bg-yellow-50 text-yellow-800 ring-1 ring-yellow-600/20 ring-inset'
+                 when 'pending' then 'bg-gray-50 text-gray-600 ring-1 ring-gray-500/10 ring-inset'
+                 when 'failed' then 'bg-red-50 text-red-700 ring-1 ring-red-600/10 ring-inset'
+                 else 'bg-purple-50 text-purple-700 ring-1 ring-purple-700/10 ring-inset'
+                 end %>
+              <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium <%= status_style %>">
+                <%= @job_stat.status %>
+              </span>
+            </div>
+            
+            <div>
+              <p class="text-sm text-gray-500">Queue</p>
+              <p class="font-medium"><%= @job_stat.queue_name %></p>
+            </div>
+            
+            <div>
+              <p class="text-sm text-gray-500">Created At</p>
+              <p class="font-medium"><%= @job_stat.created_at.strftime('%Y-%m-%d %H:%M:%S') %></p>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-medium mb-3">Arguments</h3>
+          <div class="bg-gray-50 p-4 rounded-md overflow-auto max-h-40">
+            <pre class="text-sm text-gray-700 font-mono"><%= @job_stat.arguments %></pre>
+          </div>
+          
+          <div class="mt-6 flex space-x-3">
+            <% if ['failed', 'scheduled', 'pending', 'completed'].include?(@job_stat.status) %>
+              <%= button_to "Retry Job", retry_job_path(@job_stat.id), 
+                    method: :post, 
+                    class: "rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50",
+                    form: { data: { turbo_confirm: "Are you sure you want to retry this job?" } },
+                    disabled: @job_stat.status == 'running' %>
+            <% end %>
+            
+            <% if @job_stat.status != 'completed' %>
+              <%= button_to "Discard Job", discard_job_path(@job_stat.id), 
+                    method: :delete, 
+                    class: "rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-red-300 hover:bg-gray-50 hover:text-red-700",
+                    form: { data: { turbo_confirm: "Are you sure you want to discard this job?" } } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Error Information Section -->
+    <% if @job_stat.status == 'failed' %>
+      <div class="bg-white shadow rounded-lg p-6">
+        <h3 class="text-lg font-medium text-red-700 mb-4">Error Information</h3>
+        
+        <div class="space-y-6">
+          <!-- Error Data -->
+          <% if @job_stat.error.present? %>
+            <div>
+              <h4 class="text-sm font-medium text-gray-500 mb-2">Error Details</h4>
+              <div class="bg-red-50 p-4 rounded-md overflow-auto max-h-[500px]">
+                <pre class="font-mono text-xs text-red-700 whitespace-pre-wrap break-all"><%= @job_stat.error %></pre>
+              </div>
+            </div>
+          <% else %>
+            <div class="text-red-600 italic">
+              No error data available
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      Job not found.
+    </div>
+  <% end %>
+</div> 
+</div> 

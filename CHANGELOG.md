@@ -1,5 +1,14 @@
 ## [Unreleased]
 
+## [0.5.0] - 2025-05-20
+
+- Added job retry and discard functionality
+- Implemented status filtering with pagination
+- Updated job summary display with enhanced information
+- Added pagination support using Pagy
+- Updated queue and job models to accommodate new features
+- Improved error handling throughout the application
+
 ## [0.4.1] - 2025-05-19
 
 - Fixed issue with jobs that have no arguments showing "Error parsing arguments"

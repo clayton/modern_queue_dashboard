@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ModernQueueDashboard
-  QueueStat = Struct.new(:name, :pending, :scheduled, :running, :failed, :latency, keyword_init: true)
+  QueueStat = Struct.new(:name, :pending, :scheduled, :running, :failed, :completed, :latency, keyword_init: true)
 
   # Collection class for QueueStat objects
   class QueueStatCollection
@@ -86,6 +86,16 @@ module ModernQueueDashboard
           0
         end
 
+        # Completed: Jobs in completed_executions table
+        completed = begin
+          SolidQueue::Job
+            .where(queue_name: name)
+            .where.not(finished_at: nil)
+            .count
+        rescue
+          0
+        end
+
         # Latency: Time since oldest job in ready_executions was created
         oldest_ready_job = begin
           SolidQueue::ReadyExecution
@@ -100,7 +110,7 @@ module ModernQueueDashboard
 
         latency = oldest_ready_job ? (Time.now - oldest_ready_job).to_i : 0
 
-        QueueStat.new(name:, pending:, scheduled:, running:, failed:, latency:)
+        QueueStat.new(name:, pending:, scheduled:, running:, failed:, completed:, latency:)
       end
 
       def test_environment?

@@ -6,26 +6,37 @@
   </div>
 
   <h2 class="text-2xl font-semibold">Queue: <%= @queue_name %></h2>
+  <% if @status.present? %>
+    <p class="text-gray-600 mb-2">Filtered by status: <span class="font-medium"><%= @status %></span></p>
+  <% end %>
 
   <% if @queue %>
     <!-- Queue Stats -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="bg-white shadow-sm rounded p-4">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+      <%= link_to status_queue_path(id: @queue_name, status: "pending"), class: "bg-white shadow-sm rounded p-4 hover:shadow-md transition-shadow duration-200" do %>
         <p class="text-sm text-gray-500">Pending Jobs</p>
         <p class="text-2xl font-bold text-blue-500"><%= @queue.pending %></p>
-      </div>
-      <div class="bg-white shadow-sm rounded p-4">
+      <% end %>
+      
+      <%= link_to status_queue_path(id: @queue_name, status: "scheduled"), class: "bg-white shadow-sm rounded p-4 hover:shadow-md transition-shadow duration-200" do %>
         <p class="text-sm text-gray-500">Scheduled Jobs</p>
         <p class="text-2xl font-bold text-blue-500"><%= @queue.scheduled %></p>
-      </div>
-      <div class="bg-white shadow-sm rounded p-4">
+      <% end %>
+      
+      <%= link_to status_queue_path(id: @queue_name, status: "running"), class: "bg-white shadow-sm rounded p-4 hover:shadow-md transition-shadow duration-200" do %>
         <p class="text-sm text-gray-500">Running Jobs</p>
         <p class="text-2xl font-bold text-blue-500"><%= @queue.running %></p>
-      </div>
-      <div class="bg-white shadow-sm rounded p-4">
+      <% end %>
+      
+      <%= link_to status_queue_path(id: @queue_name, status: "failed"), class: "bg-white shadow-sm rounded p-4 hover:shadow-md transition-shadow duration-200" do %>
         <p class="text-sm text-gray-500">Failed Jobs</p>
         <p class="text-2xl font-bold text-blue-500"><%= @queue.failed %></p>
-      </div>
+      <% end %>
+      
+      <%= link_to status_queue_path(id: @queue_name, status: "completed"), class: "bg-white shadow-sm rounded p-4 hover:shadow-md transition-shadow duration-200" do %>
+        <p class="text-sm text-gray-500">Completed Jobs</p>
+        <p class="text-2xl font-bold text-blue-500"><%= @queue.completed %></p>
+      <% end %>
     </div>
 
     <!-- Queue Details -->
@@ -46,7 +57,18 @@
     
     <!-- Jobs Table -->
     <div class="bg-white shadow rounded p-6">
-      <h3 class="text-xl font-semibold mb-4">Recent Jobs</h3>
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">
+          <% if @status.present? %>
+            Recent <%= @status.capitalize %> Jobs
+          <% else %>
+            Recent Jobs
+          <% end %>
+        </h3>
+        <% if @status.present? %>
+          <%= link_to "Clear Filter", queue_path(@queue_name), class: "text-blue-500 text-sm hover:underline" %>
+        <% end %>
+      </div>
       
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
@@ -57,24 +79,27 @@
               <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
               <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Arguments</th>
               <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created At</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             <% if @jobs.any? %>
               <% @jobs.each do |job| %>
-                <tr>
-                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500"><%= job.id %></td>
+                <tr id="job-<%= job.id %>" class="<%= 'hover:bg-gray-50' %>">
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                    <%= link_to job.id, job_path(job.id), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
+                  </td>
                   <td class="px-4 py-3 whitespace-nowrap text-sm font-medium"><%= job.class_name %></td>
                   <td class="px-4 py-3 whitespace-nowrap text-sm">
-                    <% status_color = case job.status
-                       when 'completed' then 'bg-green-100 text-green-800'
-                       when 'running' then 'bg-blue-100 text-blue-800'
-                       when 'scheduled' then 'bg-yellow-100 text-yellow-800'
-                       when 'pending' then 'bg-gray-100 text-gray-800'
-                       when 'failed' then 'bg-red-100 text-red-800'
-                       else 'bg-gray-100 text-gray-800'
+                    <% status_style = case job.status
+                       when 'completed' then 'bg-green-50 text-green-700 ring-1 ring-green-600/20 ring-inset'
+                       when 'running' then 'bg-blue-50 text-blue-700 ring-1 ring-blue-700/10 ring-inset'
+                       when 'scheduled' then 'bg-yellow-50 text-yellow-800 ring-1 ring-yellow-600/20 ring-inset'
+                       when 'pending' then 'bg-gray-50 text-gray-600 ring-1 ring-gray-500/10 ring-inset'
+                       when 'failed' then 'bg-red-50 text-red-700 ring-1 ring-red-600/10 ring-inset'
+                       else 'bg-purple-50 text-purple-700 ring-1 ring-purple-700/10 ring-inset'
                        end %>
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <%= status_color %>">
+                    <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium <%= status_style %>">
                       <%= job.status %>
                     </span>
                   </td>
@@ -82,23 +107,102 @@
                   <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
                     <%= job.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
                   </td>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm">
+                    <div class="flex space-x-2">
+                      <% if job.status == 'failed' && (job.error.present? || job.backtrace.present?) %>
+                        <%= link_to "View Details", job_path(job.id), 
+                            class: "rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-blue-300 ring-inset hover:bg-gray-50 hover:text-blue-700" %>
+                      <% else %>
+                        <% if ['failed', 'scheduled', 'pending', 'completed'].include?(job.status) %>
+                          <%= button_to "Retry", retry_job_queue_path(id: @queue_name, job_id: job.id), 
+                                method: :post, 
+                                class: "rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50",
+                                form: { data: { turbo_confirm: "Are you sure you want to retry this job?" } },
+                                disabled: job.status == 'running' %>
+                        <% end %>
+                        
+                        <% if job.status != 'completed' %>
+                          <%= button_to "Discard", discard_job_queue_path(id: @queue_name, job_id: job.id), 
+                                method: :delete, 
+                                class: "rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-red-300 ring-inset hover:bg-gray-50 hover:text-red-700",
+                                form: { data: { turbo_confirm: "Are you sure you want to discard this job?" } } %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </td>
                 </tr>
-                <% if job.status == 'failed' && job.error.present? %>
-                  <tr class="bg-red-50">
-                    <td colspan="5" class="px-4 py-2 text-xs text-red-700 font-mono">
-                      <%= job.error %>
-                    </td>
-                  </tr>
-                <% end %>
               <% end %>
             <% else %>
               <tr>
-                <td colspan="5" class="px-4 py-3 text-center text-sm text-gray-500">No jobs found in this queue</td>
+                <td colspan="6" class="px-4 py-3 text-center text-sm text-gray-500">
+                  <% if @status.present? %>
+                    No <%= @status %> jobs found in this queue
+                  <% else %>
+                    No jobs found in this queue
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>
         </table>
       </div>
+      
+      <!-- Pagination -->
+      <% if @pagy&.pages && @pagy.pages > 1 %>
+        <div class="px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+          <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div>
+              <p class="text-sm text-gray-700">
+                <% if @total_count > 0 %>
+                  Showing <span class="font-medium"><%= @pagy.from %></span> to <span class="font-medium"><%= @pagy.to %></span> of <span class="font-medium"><%= @pagy.count %></span> results
+                <% else %>
+                  No matching jobs found
+                <% end %>
+              </p>
+            </div>
+            <div>
+              <% if @total_count > 0 %>
+                <nav class="relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
+                  <% if @pagy.prev %>
+                    <%= link_to @status.present? ? status_queue_path(id: @queue_name, status: @status, page: @pagy.prev) : queue_path(@queue_name, page: @pagy.prev), 
+                        class: "relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" do %>
+                      <span class="sr-only">Previous</span>
+                      &laquo;
+                    <% end %>
+                  <% else %>
+                    <span class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-gray-100 text-sm font-medium text-gray-400 cursor-not-allowed">
+                      <span class="sr-only">Previous</span>
+                      &laquo;
+                    </span>
+                  <% end %>
+                  
+                  <% @pagy.series.each do |item| %>
+                    <% if item.is_a?(Integer) %>
+                      <%= link_to item, @status.present? ? status_queue_path(id: @queue_name, status: @status, page: item) : queue_path(@queue_name, page: item), 
+                          class: "relative inline-flex items-center px-4 py-2 border #{item == @pagy.page ? 'border-blue-500 bg-blue-50 text-blue-600' : 'border-gray-300 bg-white text-gray-500 hover:bg-gray-50'} text-sm font-medium" %>
+                    <% elsif item == :gap %>
+                      <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
+                    <% end %>
+                  <% end %>
+                  
+                  <% if @pagy.next %>
+                    <%= link_to @status.present? ? status_queue_path(id: @queue_name, status: @status, page: @pagy.next) : queue_path(@queue_name, page: @pagy.next), 
+                        class: "relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" do %>
+                      <span class="sr-only">Next</span>
+                      &raquo;
+                    <% end %>
+                  <% else %>
+                    <span class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-gray-100 text-sm font-medium text-gray-400 cursor-not-allowed">
+                      <span class="sr-only">Next</span>
+                      &raquo;
+                    </span>
+                  <% end %>
+                </nav>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   <% else %>
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
