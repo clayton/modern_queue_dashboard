@@ -1,8 +1,12 @@
 # Modern Queue Dashboard
 
-A mountable Rails engine that provides a clean dashboard **specifically designed for monitoring [Solid Queue](https://github.com/basecamp/solid_queue)** jobs. Built with Tailwind CSS, Turbo frames, and Stimulus controllers.
+A mountable Rails engine that provides a clean dashboard **specifically designed for monitoring [Solid Queue](https://github.com/basecamp/solid_queue)** jobs.
 
 ![Dashboard Screenshot](screenshots/dashboard.png)
+
+## Why not use Mission Control?
+
+(Mission Control)[https://github.com/rails/mission_control-jobs] is a great tool for monitoring Active Job in Rails. I mostly forgot that it existed and built this for fun. You should probably just use that. 😄
 
 ## Why the "Modern Queue Dashboard"?
 
