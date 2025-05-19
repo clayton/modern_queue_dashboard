@@ -44,8 +44,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", "~> 8.0", ">= 8.0.0"
   spec.add_dependency "solid_queue", "~> 1.1"
-  spec.add_dependency "tailwindcss-rails", "~> 2.0"
-  spec.add_dependency "turbo-rails", "~> 1.5"
+  spec.add_dependency "tailwindcss-rails", "~> 4.0"
+  spec.add_dependency "turbo-rails", "~> 2.0"
 
   # Development dependencies
   spec.add_development_dependency "minitest", "~> 5.18"

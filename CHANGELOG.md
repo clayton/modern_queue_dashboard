@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [0.3.0] - 2025-05-19
+
+- Updated tailwindcss-rails dependency to ~> 4.0
+- Updated turbo-rails dependency to ~> 2.0
+- Improved compatibility with Rails 8.0.2
+
 ## [0.2.2] - 2025-05-18
 
 - Fixed CI workflow to run RuboCop and fail the build if there are issues
