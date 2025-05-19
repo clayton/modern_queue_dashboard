@@ -13,7 +13,7 @@
       <turbo-frame id="metric_<%= metric.key %>">
         <div class="bg-white shadow-sm rounded p-4 text-center">
           <p class="text-sm text-gray-500"><%= metric.label %></p>
-          <p class="text-2xl font-bold text-sky-500"><%= metric.value %></p>
+          <p class="text-2xl font-bold text-blue-500"><%= metric.value %></p>
         </div>
       </turbo-frame>
     <% end %>
@@ -35,7 +35,7 @@
       <tbody class="bg-white divide-y divide-gray-200">
         <% @queues.each do |queue| %>
           <tr>
-            <td class="px-6 py-4 whitespace-nowrap font-medium text-sky-500">
+            <td class="px-6 py-4 whitespace-nowrap font-medium text-blue-500">
               <%= link_to queue.name, queue_path(queue.name), data: { turbo_frame: "_top" } %>
             </td>
             <td class="px-6 py-4 text-right"><%= queue.pending %></td>
@@ -47,5 +47,56 @@
         <% end %>
       </tbody>
     </table>
+  </div>
+  
+  <!-- Recent Jobs Table -->
+  <h2 class="text-2xl font-semibold mt-6">Recent Jobs</h2>
+  <div class="bg-white shadow rounded mt-4">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Queue</th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Job Class</th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created At</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% if @recent_jobs.any? %>
+            <% @recent_jobs.each do |job| %>
+              <tr>
+                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500"><%= job.id %></td>
+                <td class="px-4 py-3 whitespace-nowrap font-medium text-blue-500">
+                  <%= link_to job.queue_name, queue_path(job.queue_name), data: { turbo_frame: "_top" } %>
+                </td>
+                <td class="px-4 py-3 whitespace-nowrap text-sm font-medium"><%= job.class_name %></td>
+                <td class="px-4 py-3 whitespace-nowrap text-sm">
+                  <% status_color = case job.status
+                     when 'completed' then 'bg-green-100 text-green-800'
+                     when 'running' then 'bg-blue-100 text-blue-800'
+                     when 'scheduled' then 'bg-yellow-100 text-yellow-800'
+                     when 'pending' then 'bg-gray-100 text-gray-800'
+                     when 'failed' then 'bg-red-100 text-red-800'
+                     else 'bg-gray-100 text-gray-800'
+                     end %>
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <%= status_color %>">
+                    <%= job.status %>
+                  </span>
+                </td>
+                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                  <%= job.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="5" class="px-4 py-3 text-center text-sm text-gray-500">No jobs found</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div> 

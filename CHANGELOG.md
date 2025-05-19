@@ -1,5 +1,13 @@
 ## [Unreleased]
 
+## [0.4.0] - 2025-05-20
+
+- Changed Tailwind's Sky color to Blue color for better contrast
+- Added jobs table to queue view showing up to 50 most recent jobs with their status
+- Added recent jobs table to main dashboard showing 10 most recent jobs across all queues
+- Added color-coded status indicators for jobs
+- Display detailed error information for failed jobs
+
 ## [0.3.2] - 2025-05-19
 
 - Fixed issue with load order
