@@ -6,7 +6,7 @@ A mountable Rails engine that provides a clean dashboard **specifically designed
 
 ## Why not use Mission Control?
 
-(Mission Control)[https://github.com/rails/mission_control-jobs] is a great tool for monitoring Active Job in Rails. I mostly forgot that it existed and built this for fun. You should probably just use that. 😄
+[Mission Control](https://github.com/rails/mission_control-jobs) is a great tool for monitoring Active Job in Rails. I mostly forgot that it existed and built this for fun. You should probably just use that. 😄
 
 ## Why the "Modern Queue Dashboard"?
 
@@ -162,3 +162,7 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the Modern Queue Dashboard project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/clayton/modern_queue_dashboard/blob/main/CODE_OF_CONDUCT.md).
+
+## Acknowledgements
+
+This project was inspired by [active_storage_dashboard](https://github.com/giovapanasiti/active_storage_dashboard)
