@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [0.2.2] - 2025-05-18
+
+- Fixed CI workflow to run RuboCop and fail the build if there are issues
+- Added a CHANGELOG.md file
+- Added a Gemfile.lock file
+
 ## [0.2.1] - 2023-07-30
 
 - Updated UI color scheme from indigo to sky blue
