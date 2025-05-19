@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for Modern Queue Dashboard */
+.jobs-container {
+  @apply bg-white shadow rounded p-4;
+} 

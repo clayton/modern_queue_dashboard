@@ -1,0 +1,51 @@
+<div class="container mx-auto p-6 space-y-6">
+  <h1 class="text-3xl font-semibold">Modern Queue Dashboard</h1>
+
+  <div class="flex items-center space-x-2 mb-4">
+    <%= link_to "← Back to Queues", queues_path, class: "text-indigo-600" %>
+  </div>
+
+  <h2 class="text-2xl font-semibold">Queue: <%= @queue_name %></h2>
+
+  <% if @queue %>
+    <!-- Queue Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white shadow-sm rounded p-4">
+        <p class="text-sm text-gray-500">Pending Jobs</p>
+        <p class="text-2xl font-bold text-indigo-600"><%= @queue.pending %></p>
+      </div>
+      <div class="bg-white shadow-sm rounded p-4">
+        <p class="text-sm text-gray-500">Scheduled Jobs</p>
+        <p class="text-2xl font-bold text-indigo-600"><%= @queue.scheduled %></p>
+      </div>
+      <div class="bg-white shadow-sm rounded p-4">
+        <p class="text-sm text-gray-500">Running Jobs</p>
+        <p class="text-2xl font-bold text-indigo-600"><%= @queue.running %></p>
+      </div>
+      <div class="bg-white shadow-sm rounded p-4">
+        <p class="text-sm text-gray-500">Failed Jobs</p>
+        <p class="text-2xl font-bold text-indigo-600"><%= @queue.failed %></p>
+      </div>
+    </div>
+
+    <!-- Queue Details -->
+    <div class="bg-white shadow rounded p-6">
+      <h3 class="text-xl font-semibold mb-4">Queue Details</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <p class="text-sm text-gray-500">Queue Name</p>
+          <p class="font-semibold"><%= @queue.name %></p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Average Latency</p>
+          <p class="font-semibold"><%= @queue.latency %> ms</p>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      Queue not found.
+    </div>
+  <% end %>
+</div> 

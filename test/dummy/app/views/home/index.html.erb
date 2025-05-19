@@ -1,0 +1,15 @@
+<h1>Welcome to the Dummy App</h1>
+
+<% if flash[:notice] %>
+  <div style="color: green; padding: 10px; margin-bottom: 10px; border: 1px solid green;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<p>This is a test application for the Modern Queue Dashboard gem.</p>
+
+<div style="margin-bottom: 20px;">
+  <%= button_to "Enqueue Test Job", jobs_path, method: :post %>
+</div>
+
+<p><%= link_to "View Queue Dashboard", "/queue-dashboard" %></p> 

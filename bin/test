@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -e
+
+case $1 in
+  all)
+    bundle exec rake ci
+    ;;
+  unit)
+    bundle exec rake unit_tests
+    ;;
+  lint|rubocop)
+    bundle exec rubocop
+    ;;
+  *)
+    echo "Usage: bin/test [all|unit|lint]"
+    echo ""
+    echo "  all    - Run unit tests and lint checks"
+    echo "  unit   - Run only unit tests"
+    echo "  lint   - Run only RuboCop lint checks"
+    ;;
+esac 

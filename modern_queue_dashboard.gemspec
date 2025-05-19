@@ -5,8 +5,8 @@ require_relative "lib/modern_queue_dashboard/version"
 Gem::Specification.new do |spec|
   spec.name = "modern_queue_dashboard"
   spec.version = ModernQueueDashboard::VERSION
-  spec.authors = ["Clayton Lengel-Zigich"]
-  spec.email = ["6334+clayton@users.noreply.github.com"]
+  spec.authors = [ "Clayton Lengel-Zigich" ]
+  spec.email = [ "6334+clayton@users.noreply.github.com" ]
 
   spec.summary = "Dashboard for Rails Solid Queue jobs"
   spec.description = "Mountable Hotwire/Tailwind dashboard engine that visualizes Solid Queue job queues and metrics."
@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
   spec.metadata["changelog_uri"] = "https://github.com/clayton/modern_queue_dashboard/blob/main/CHANGELOG.md"
+  spec.metadata["rubygems_mfa_required"] = "true"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -31,7 +32,7 @@ Gem::Specification.new do |spec|
   end
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = [ "lib" ]
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
@@ -48,4 +49,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.18"
   spec.add_development_dependency "minitest-reporters", "~> 1.6"
   spec.add_development_dependency "rubocop", "~> 1.21"
+  spec.add_development_dependency "rubocop-rails-omakase", "~> 1.0"
 end

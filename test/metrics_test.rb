@@ -8,7 +8,8 @@ class MetricsTest < Minitest::Test
 
     assert_equal 6, metrics.size
     keys = metrics.map(&:key)
-    assert_equal %i[pending scheduled running failed completed latency], keys.sort
+    expected_keys = %i[pending scheduled running failed completed latency]
+    assert_equal expected_keys.sort, keys.sort
   end
 
   def test_metrics_struct_has_attributes

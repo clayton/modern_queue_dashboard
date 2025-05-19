@@ -1,0 +1,558 @@
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (0)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2025-05-18 22:25:45.737826', '2025-05-18 22:25:45.737828') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '304fe853693c8703e374a9e1a59433c7d63e9ef6', '2025-05-18 22:25:45.744645', '2025-05-18 22:25:45.744646') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------------
+ModernQueueDashboardTest: test_can_enqueue_and_view_job_in_dashboard
+--------------------------------------------------------------------
+Started POST "/jobs" for 127.0.0.1 at 2025-05-18 15:25:45 -0700
+Processing by JobsController#create as HTML
+[ActiveJob] Enqueued TestJob (Job ID: 82b2bf18-b612-44a8-aff5-0b598b8a11e1) to Test(default) with arguments: "test argument", "2025-05-18 22:25:46 UTC"
+Redirected to http://www.example.com/
+Completed 302 Found in 23ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/" for 127.0.0.1 at 2025-05-18 15:25:46 -0700
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 5.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.2ms | GC: 0.0ms)
+Completed 200 OK in 27ms (Views: 14.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:25:46 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------
+ModernQueueDashboardTest: test_can_access_dashboard
+---------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:25:46 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------------
+ModernQueueDashboardTest: test_can_enqueue_and_view_job_in_dashboard
+--------------------------------------------------------------------
+Started POST "/jobs" for 127.0.0.1 at 2025-05-18 15:26:14 -0700
+Processing by JobsController#create as HTML
+[ActiveJob] Enqueued TestJob (Job ID: 3185f17f-ff77-4207-9945-abe8b54d8db6) to Test(default) with arguments: "test argument", "2025-05-18 22:26:14 UTC"
+Redirected to http://www.example.com/
+Completed 302 Found in 14ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 3.9ms)
+Started GET "/" for 127.0.0.1 at 2025-05-18 15:26:14 -0700
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.0ms | GC: 1.3ms)
+Completed 200 OK in 25ms (Views: 12.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.9ms)
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:26:14 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 4.0ms | GC: 0.5ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 4.1ms | GC: 0.5ms)
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------
+ModernQueueDashboardTest: test_can_access_dashboard
+---------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:26:14 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------------
+ModernQueueDashboardTest: test_can_enqueue_and_view_job_in_dashboard
+--------------------------------------------------------------------
+Started POST "/jobs" for 127.0.0.1 at 2025-05-18 15:27:33 -0700
+Processing by JobsController#create as HTML
+[ActiveJob] Enqueued TestJob (Job ID: f277f685-e9dc-4be3-bcf7-47830cb77610) to Test(default) with arguments: "test argument", "2025-05-18 22:27:33 UTC"
+Redirected to http://www.example.com/
+Completed 302 Found in 15ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 3.8ms)
+Started GET "/" for 127.0.0.1 at 2025-05-18 15:27:33 -0700
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 3.6ms | GC: 0.9ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.3ms | GC: 3.3ms)
+Completed 200 OK in 30ms (Views: 16.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 6.0ms)
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:27:33 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.6ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 2.6ms | GC: 0.6ms)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.6ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------
+ModernQueueDashboardTest: test_can_access_dashboard
+---------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:27:33 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.4ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------
+ModernQueueDashboardTest: test_can_access_dashboard
+---------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:28:29 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 8.3ms | GC: 0.0ms)
+Completed 200 OK in 32ms (Views: 12.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------------
+ModernQueueDashboardTest: test_can_enqueue_and_view_job_in_dashboard
+--------------------------------------------------------------------
+Started POST "/jobs" for 127.0.0.1 at 2025-05-18 15:28:29 -0700
+Processing by JobsController#create as HTML
+[ActiveJob] Enqueued TestJob (Job ID: dc9161ae-c773-49d5-9f5c-f1a841e1e1ae) to Test(default) with arguments: "test argument", "2025-05-18 22:28:29 UTC"
+Redirected to http://www.example.com/
+Completed 302 Found in 4ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/" for 127.0.0.1 at 2025-05-18 15:28:29 -0700
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.9ms | GC: 0.0ms)
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:28:29 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------------------
+ModernQueueDashboardSystemTest: test_enqueuing_and_viewing_jobs
+---------------------------------------------------------------
+Started GET "/" for 127.0.0.1 at 2025-05-18 15:29:18 -0700
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 4.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.9ms | GC: 0.0ms)
+Completed 200 OK in 38ms (Views: 16.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 2.4ms)
+Started GET "/assets/application-8b441ae0.css" for 127.0.0.1 at 2025-05-18 15:29:18 -0700
+Started POST "/jobs" for 127.0.0.1 at 2025-05-18 15:29:19 -0700
+Processing by JobsController#create as HTML
+[ActiveJob] Enqueued TestJob (Job ID: 52157f12-94e0-4127-9b75-96322cead99b) to Test(default) with arguments: "test argument", "2025-05-18 22:29:19 UTC"
+Redirected to http://127.0.0.1:64160/
+Completed 302 Found in 13ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/" for 127.0.0.1 at 2025-05-18 15:29:19 -0700
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.1ms | GC: 0.0ms)
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:29:19 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.7ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/assets/modern_queue_dashboard-a38e9206.css" for 127.0.0.1 at 2025-05-18 15:29:19 -0700
+Started GET "/assets/modern_queue_dashboard-6137a27b.js" for 127.0.0.1 at 2025-05-18 15:29:19 -0700
+Started GET "/favicon.ico" for 127.0.0.1 at 2025-05-18 15:29:19 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------
+ModernQueueDashboardSystemTest: test_visiting_the_dashboard
+-----------------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:29:19 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.6ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 1.0ms | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------
+SolidQueueIntegrationTest: test_can_see_job_details_in_queue
+------------------------------------------------------------
+Started POST "/jobs" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+Processing by JobsController#create as HTML
+[ActiveJob] Enqueued TestJob (Job ID: 7d752afc-7a32-4649-b306-630b17b02aac) to Test(default) with arguments: "test argument", "2025-05-18 22:30:30 UTC"
+Redirected to http://www.example.com/
+Completed 302 Found in 9ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/queue-dashboard/queues/default" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+Processing by ModernQueueDashboard::QueuesController#show as HTML
+  Parameters: {"id" => "default"}
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 4.7ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 8.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------------------------
+SolidQueueIntegrationTest: test_enqueuing_a_job_updates_the_dashboard_metrics
+-----------------------------------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.6ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started POST "/queue-dashboard/jobs" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+  
+ActionController::RoutingError (No route matches [POST] "/queue-dashboard/jobs"):
+  
+test/integration/solid_queue_integration_test.rb:11:in 'block (2 levels) in <class:SolidQueueIntegrationTest>'
+test/integration/solid_queue_integration_test.rb:10:in 'block in <class:SolidQueueIntegrationTest>'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------
+ConfigurationTest: test_configuration_can_be_updated
+----------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------
+ConfigurationTest: test_default_configuration_values
+----------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------------
+ModernQueueDashboardTest: test_can_enqueue_and_view_job_in_dashboard
+--------------------------------------------------------------------
+Started POST "/jobs" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+Processing by JobsController#create as HTML
+[ActiveJob] Enqueued TestJob (Job ID: d9a546c1-4a17-46e4-b626-1b7d3665c7d8) to Test(default) with arguments: "test argument", "2025-05-18 22:30:30 UTC"
+Redirected to http://www.example.com/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 3.2ms | GC: 0.9ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.1ms | GC: 0.9ms)
+Completed 200 OK in 7ms (Views: 5.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.9ms)
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.7ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------
+ModernQueueDashboardTest: test_can_access_queue_details_page
+------------------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/queue-dashboard/queues/default" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+Processing by ModernQueueDashboard::QueuesController#show as HTML
+  Parameters: {"id" => "default"}
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.2ms | GC: 0.0ms)
+Completed 200 OK in 0ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------
+ModernQueueDashboardTest: test_can_access_dashboard
+---------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------
+ModernQueueDashboardTest: test_redirects_for_nonexistent_queue
+--------------------------------------------------------------
+Started GET "/queue-dashboard/queues/nonexistent" for 127.0.0.1 at 2025-05-18 15:30:30 -0700
+Processing by ModernQueueDashboard::QueuesController#show as HTML
+  Parameters: {"id" => "nonexistent"}
+Redirected to http://www.example.com/queue-dashboard/queues
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------
+ConfigurationTest: test_default_configuration_values
+----------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------
+ConfigurationTest: test_configuration_can_be_updated
+----------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------------------------
+SolidQueueIntegrationTest: test_enqueuing_a_job_updates_the_dashboard_metrics
+-----------------------------------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:30:46 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 1.4ms | GC: 0.3ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 8.3ms | GC: 2.6ms)
+Completed 200 OK in 35ms (Views: 12.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 7.7ms)
+[ActiveJob] Enqueued TestJob (Job ID: f41f7700-0324-4c8f-98f8-103a0b2e0ac2) to Test(default) with arguments: "test argument 0", "2025-05-18 22:30:46 UTC"
+[ActiveJob] Enqueued TestJob (Job ID: 18f64083-bb15-4a69-9757-5a18113f0ded) to Test(default) with arguments: "test argument 1", "2025-05-18 22:30:46 UTC"
+[ActiveJob] Enqueued TestJob (Job ID: e0373938-27ae-4e30-9562-eae1fff98a36) to Test(default) with arguments: "test argument 2", "2025-05-18 22:30:46 UTC"
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:30:46 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------
+SolidQueueIntegrationTest: test_can_see_job_details_in_queue
+------------------------------------------------------------
+[ActiveJob] Enqueued TestJob (Job ID: 46af6dc1-f3bd-4829-b165-88af083c2e93) to Test(default) with arguments: "test argument", "2025-05-18 22:30:46 UTC"
+Started GET "/queue-dashboard/queues/default" for 127.0.0.1 at 2025-05-18 15:30:46 -0700
+Processing by ModernQueueDashboard::QueuesController#show as HTML
+  Parameters: {"id" => "default"}
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.7ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.9ms | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------
+ModernQueueDashboardTest: test_can_access_queue_details_page
+------------------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:30:46 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.4ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+Started GET "/queue-dashboard/queues/default" for 127.0.0.1 at 2025-05-18 15:30:46 -0700
+Processing by ModernQueueDashboard::QueuesController#show as HTML
+  Parameters: {"id" => "default"}
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------
+ModernQueueDashboardTest: test_redirects_for_nonexistent_queue
+--------------------------------------------------------------
+Started GET "/queue-dashboard/queues/nonexistent" for 127.0.0.1 at 2025-05-18 15:30:46 -0700
+Processing by ModernQueueDashboard::QueuesController#show as HTML
+  Parameters: {"id" => "nonexistent"}
+Redirected to http://www.example.com/queue-dashboard/queues
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------
+ModernQueueDashboardTest: test_can_access_dashboard
+---------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:30:46 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 1.2ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 1.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------------
+ModernQueueDashboardTest: test_can_enqueue_and_view_job_in_dashboard
+--------------------------------------------------------------------
+Started POST "/jobs" for 127.0.0.1 at 2025-05-18 15:30:46 -0700
+Processing by JobsController#create as HTML
+[ActiveJob] Enqueued TestJob (Job ID: a0530e39-1bc1-4a18-9d0f-24f29d77a644) to Test(default) with arguments: "test argument", "2025-05-18 22:30:46 UTC"
+Redirected to http://www.example.com/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/" for 127.0.0.1 at 2025-05-18 15:30:46 -0700
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.9ms | GC: 0.0ms)
+Completed 200 OK in 6ms (Views: 4.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:30:46 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------------
+ModernQueueDashboardTest: test_can_enqueue_and_view_job_in_dashboard
+--------------------------------------------------------------------
+Started POST "/jobs" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by JobsController#create as HTML
+[ActiveJob] Enqueued TestJob (Job ID: 9a06ed90-24ef-4ea1-9730-da35d27c79ad) to Test(default) with arguments: "test argument", "2025-05-18 22:31:34 UTC"
+Redirected to http://www.example.com/
+Completed 302 Found in 10ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.1ms)
+Started GET "/" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.3ms | GC: 0.0ms)
+Completed 200 OK in 12ms (Views: 8.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 1.0ms | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------
+ModernQueueDashboardTest: test_can_access_dashboard
+---------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.2ms | GC: 0.0ms)
+Completed 200 OK in 0ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------
+ModernQueueDashboardTest: test_can_access_queue_details_page
+------------------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.4ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started GET "/queue-dashboard/queues/default" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by ModernQueueDashboard::QueuesController#show as HTML
+  Parameters: {"id" => "default"}
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.7ms | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------
+ModernQueueDashboardTest: test_redirects_for_nonexistent_queue
+--------------------------------------------------------------
+Started GET "/queue-dashboard/queues/nonexistent" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by ModernQueueDashboard::QueuesController#show as HTML
+  Parameters: {"id" => "nonexistent"}
+Redirected to http://www.example.com/queue-dashboard/queues
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------------------------------
+JsConfigurationTest: test_dashboard_includes_refresh_interval_data_attribute
+----------------------------------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 1.2ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 1.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------
+ConfigurationTest: test_configuration_can_be_updated
+----------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------
+ConfigurationTest: test_default_configuration_values
+----------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------
+SolidQueueIntegrationTest: test_can_see_job_details_in_queue
+------------------------------------------------------------
+[ActiveJob] Enqueued TestJob (Job ID: 0364e8ac-2ca2-4af3-98f9-1a8a96c2f460) to Test(default) with arguments: "test argument", "2025-05-18 22:31:34 UTC"
+Started GET "/queue-dashboard/queues/default" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by ModernQueueDashboard::QueuesController#show as HTML
+  Parameters: {"id" => "default"}
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/queues/show.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------------------------
+SolidQueueIntegrationTest: test_enqueuing_a_job_updates_the_dashboard_metrics
+-----------------------------------------------------------------------------
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[ActiveJob] Enqueued TestJob (Job ID: 21c62bbf-18df-4219-8643-13bf102958d6) to Test(default) with arguments: "test argument 0", "2025-05-18 22:31:34 UTC"
+[ActiveJob] Enqueued TestJob (Job ID: 7d013d08-6acf-4607-bb96-dcc7436f4874) to Test(default) with arguments: "test argument 1", "2025-05-18 22:31:34 UTC"
+[ActiveJob] Enqueued TestJob (Job ID: dd571c22-e84d-442b-931b-01dad5f22847) to Test(default) with arguments: "test argument 2", "2025-05-18 22:31:34 UTC"
+Started GET "/queue-dashboard" for 127.0.0.1 at 2025-05-18 15:31:34 -0700
+Processing by ModernQueueDashboard::DashboardController#index as HTML
+  Rendering layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb
+  Rendering /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application
+  Rendered /Users/clayton/Projects/modern_queue_dashboard/app/views/modern_queue_dashboard/dashboard/index.html.erb within layouts/modern_queue_dashboard/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout /Users/clayton/Projects/modern_queue_dashboard/app/views/layouts/modern_queue_dashboard/application.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m

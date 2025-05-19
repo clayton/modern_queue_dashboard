@@ -1,5 +1,11 @@
-<div class="container mx-auto p-6 space-y-6">
-  <h1 class="text-3xl font-semibold">Solid Queue Dashboard</h1>
+<div class="container mx-auto p-6 space-y-6 modern-queue-dashboard" 
+     data-refresh-interval="<%= ModernQueueDashboard.configuration.refresh_interval %>">
+  <h1 class="text-3xl font-semibold">Modern Queue Dashboard</h1>
+  
+  <div class="text-sm text-gray-500 mb-4">
+    Refresh interval: <%= ModernQueueDashboard.configuration.refresh_interval %> seconds | 
+    Timezone: <%= ModernQueueDashboard.configuration.time_zone %>
+  </div>
 
   <!-- Metric Cards -->
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -30,13 +36,13 @@
         <% @queues.each do |queue| %>
           <tr>
             <td class="px-6 py-4 whitespace-nowrap font-medium text-indigo-600">
-              <%= link_to queue.name, modern_queue_dashboard.queue_path(queue.name), data: { turbo_frame: "_top" } %>
+              <%= link_to queue.name, queue_path(queue.name), data: { turbo_frame: "_top" } %>
             </td>
             <td class="px-6 py-4 text-right"><%= queue.pending %></td>
             <td class="px-6 py-4 text-right"><%= queue.scheduled %></td>
             <td class="px-6 py-4 text-right"><%= queue.running %></td>
             <td class="px-6 py-4 text-right"><%= queue.failed %></td>
-            <td class="px-6 py-4 text-right"><%= distance_of_time_in_words(queue.latency) %></td>
+            <td class="px-6 py-4 text-right"><%= queue.latency %> ms</td>
           </tr>
         <% end %>
       </tbody>

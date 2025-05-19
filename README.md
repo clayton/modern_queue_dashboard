@@ -105,7 +105,41 @@ end
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run the following:
+
+```bash
+# Run unit tests
+bundle exec rake unit_tests
+
+# Run unit tests + RuboCop style checks
+bundle exec rake ci
+
+# Run just RuboCop
+bundle exec rubocop
+```
+
+### Dummy Application
+
+The gem includes a dummy Rails application in `test/dummy` for integration testing and development:
+
+```bash
+# Start the dummy app server
+cd test/dummy
+bin/rails server
+
+# Start the solid_queue worker
+cd test/dummy
+bin/rails solid_queue:process
+```
+
+Then visit http://localhost:3000 and navigate to http://localhost:3000/queue-dashboard to see the dashboard.
+
+### CI Process
+
+The CI pipeline runs on GitHub Actions and includes:
+- Unit tests for the gem
+- RuboCop style checks using the Rails Omakase style guide
+- (Optional) Integration tests with the dummy application
 
 ## Contributing
 
