@@ -1,15 +1,44 @@
-<h1>Welcome to the Dummy App</h1>
-
-<% if flash[:notice] %>
-  <div style="color: green; padding: 10px; margin-bottom: 10px; border: 1px solid green;">
-    <%= flash[:notice] %>
+<div class="container mx-auto p-6">
+  <h1 class="text-2xl font-bold mb-4">Solid Queue Dashboard Tester</h1>
+  
+  <div class="flex gap-4 mb-6">
+    <%= link_to "Dashboard", queue_dashboard_path, class: "px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" %>
+    <%= link_to "Debug Info", debug_jobs_path, class: "px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700" %>
   </div>
-<% end %>
-
-<p>This is a test application for the Modern Queue Dashboard gem.</p>
-
-<div style="margin-bottom: 20px;">
-  <%= button_to "Enqueue Test Job", jobs_path, method: :post %>
-</div>
-
-<p><%= link_to "View Queue Dashboard", "/queue-dashboard" %></p> 
+  
+  <div class="bg-white shadow rounded p-6 mb-6">
+    <h2 class="text-xl font-semibold mb-4">Enqueue Test Jobs</h2>
+    
+    <%= form_tag jobs_path, method: :post, class: "space-y-4" do %>
+      <div>
+        <label class="block mb-1">Number of Jobs</label>
+        <%= select_tag :count, options_for_select([1, 5, 10, 20], 5), class: "border rounded px-2 py-1" %>
+      </div>
+      
+      <div>
+        <label class="block mb-1">Options</label>
+        <div class="flex items-center gap-2">
+          <%= check_box_tag :stagger, '1', true, class: "rounded" %>
+          <span>Stagger jobs (2 seconds apart)</span>
+        </div>
+      </div>
+      
+      <%= submit_tag "Enqueue Jobs", class: "px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" %>
+    <% end %>
+  </div>
+  
+  <% if flash[:notice] %>
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  
+  <div class="bg-white shadow rounded p-6">
+    <h2 class="text-xl font-semibold mb-4">Solid Queue Instructions</h2>
+    <p class="mb-2">Make sure the Solid Queue workers are running:</p>
+    <pre class="bg-gray-100 p-3 rounded text-sm mb-3">bin/rails solid_queue:start</pre>
+    
+    <p class="mb-2">Or with the Puma plugin enabled:</p>
+    <pre class="bg-gray-100 p-3 rounded text-sm">SOLID_QUEUE_IN_PUMA=1 bin/rails server</pre>
+  </div>
+</div> 

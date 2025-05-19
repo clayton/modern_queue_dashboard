@@ -1,10 +1,18 @@
 ## [Unreleased]
 
-## [0.3.1] - 2025-05-20
+## [0.3.2] - 2025-05-19
 
-- Fixed compatibility with Solid Queue standard schema structure
-- Updated queries to use `scheduled_at` instead of `run_at`
-- Improved job status tracking via the appropriate Solid Queue tables
+- Fixed issue with load order
+
+## [0.3.1] - 2025-05-19
+
+- Fixed compatibility with Solid Queue's database schema
+- Updated queries to properly read from Solid Queue's execution tables:
+  - Ready jobs from `solid_queue_ready_executions`
+  - Scheduled jobs from `solid_queue_scheduled_executions`
+  - Running jobs from `solid_queue_claimed_executions`
+  - Failed jobs from `solid_queue_failed_executions`
+- Added error handling for cases where tables might not be available
 - Updated README to clarify that this dashboard is exclusively for Solid Queue
 
 ## [0.3.0] - 2025-05-19

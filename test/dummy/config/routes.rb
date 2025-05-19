@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   mount ModernQueueDashboard::Engine => "/queue-dashboard"
 
   # Jobs controller for enqueuing test jobs
-  resources :jobs, only: [ :create ]
+  resources :jobs, only: [ :create ] do
+    collection do
+      get :debug
+    end
+  end
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

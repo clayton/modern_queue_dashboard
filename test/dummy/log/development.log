@@ -4,3 +4,5 @@
   [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-05-18 22:24:59.578038', '2025-05-18 22:24:59.578041') RETURNING "key" /*application='Dummy'*/[0m
   [1m[36mActiveRecord::SchemaMigration Load (4.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
   [1m[36mSolidQueue::Job Count (7.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "solid_queue_jobs" /*application='Dummy'*/[0m
+SolidQueue-1.1.5 Error registering Supervisor (13.2ms)  pid: 96470, hostname: "Claytons-M3.local", name: "supervisor-2a35d5fe9869d8a33a5e", error: "ActiveRecord::StatementInvalid Could not find table 'solid_queue_processes'"
+SolidQueue-1.1.5 Started Supervisor (31.2ms)  pid: 96470, hostname: "Claytons-M3.local", process_id: nil, name: "supervisor-2a35d5fe9869d8a33a5e"

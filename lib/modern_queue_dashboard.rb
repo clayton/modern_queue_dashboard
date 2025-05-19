@@ -4,9 +4,6 @@ require "rails"
 require "action_controller/railtie"
 require "active_support/dependencies"
 require_relative "modern_queue_dashboard/version"
-require_relative "modern_queue_dashboard/engine"
-require_relative "modern_queue_dashboard/metrics"
-require_relative "modern_queue_dashboard/queue_summary"
 
 module ModernQueueDashboard
   class Error < StandardError; end
@@ -31,5 +28,11 @@ module ModernQueueDashboard
       yield(configuration)
     end
   end
-  # Your code goes here...
 end
+
+# Load engine which will handle autoloading of app files
+require_relative "modern_queue_dashboard/engine"
+
+# Explicitly require models for compatibility
+require_relative "../app/models/modern_queue_dashboard/queue_summary"
+require_relative "../app/models/modern_queue_dashboard/metrics"

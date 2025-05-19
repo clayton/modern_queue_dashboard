@@ -7,6 +7,9 @@ module ModernQueueDashboard
   class Engine < ::Rails::Engine
     isolate_namespace ModernQueueDashboard
 
+    # Set up paths for models
+    config.paths.add "app/models", eager_load: true
+
     # Precompile CSS & JS builds that ship with the gem
     initializer "modern_queue_dashboard.assets" do |app|
       # Check if the app uses the asset pipeline that requires explicit precompilation
