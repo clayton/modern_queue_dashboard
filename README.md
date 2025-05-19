@@ -1,6 +1,6 @@
 # Modern Queue Dashboard
 
-A mountable Rails engine that provides a clean, Hotwire-powered dashboard for monitoring [Solid Queue](https://github.com/basecamp/solid_queue) jobs. Built with Tailwind CSS, Turbo frames, and Stimulus controllers.
+A mountable Rails engine that provides a clean, Hotwire-powered dashboard **specifically designed for monitoring [Solid Queue](https://github.com/basecamp/solid_queue)** jobs. Built with Tailwind CSS, Turbo frames, and Stimulus controllers.
 
 ![Dashboard Screenshot](screenshots/dashboard.png)
 
@@ -17,7 +17,7 @@ A mountable Rails engine that provides a clean, Hotwire-powered dashboard for mo
 
 * Rails 8.0+
 * Ruby 3.3.8+
-* Solid Queue 1.1+
+* **Solid Queue 1.1+** (this dashboard is exclusively for Solid Queue and does not support other job backends)
 
 ## Installation
 

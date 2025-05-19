@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [0.3.1] - 2025-05-20
+
+- Fixed compatibility with Solid Queue standard schema structure
+- Updated queries to use `scheduled_at` instead of `run_at`
+- Improved job status tracking via the appropriate Solid Queue tables
+- Updated README to clarify that this dashboard is exclusively for Solid Queue
+
 ## [0.3.0] - 2025-05-19
 
 - Updated tailwindcss-rails dependency to ~> 4.0

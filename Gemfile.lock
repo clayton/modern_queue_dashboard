@@ -1,11 +1,11 @@
 PATH
   remote: .
   specs:
-    modern_queue_dashboard (0.2.0)
-      rails (>= 8.0.0)
-      solid_queue (>= 1.1)
-      tailwindcss-rails (>= 2.0)
-      turbo-rails (>= 1.5)
+    modern_queue_dashboard (0.3.1)
+      rails (~> 8.0, >= 8.0.0)
+      solid_queue (~> 1.1)
+      tailwindcss-rails (~> 4.0)
+      turbo-rails (~> 2.0)
 
 GEM
   remote: https://rubygems.org/
