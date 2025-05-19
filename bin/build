@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -e
+
+# Build Tailwind CSS
+echo "Building Tailwind CSS..."
+if command -v npx &> /dev/null; then
+  npx tailwindcss -i ./app/assets/stylesheets/modern_queue_dashboard.css -o ./app/assets/builds/modern_queue_dashboard.css --minify
+else
+  echo "Error: npx not found, please install Node.js"
+  exit 1
+fi
+
+echo "Build completed successfully!" 

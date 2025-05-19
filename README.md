@@ -118,6 +118,20 @@ bundle exec rake ci
 bundle exec rubocop
 ```
 
+### Building Tailwind CSS
+
+The dashboard uses Tailwind CSS for styling. When making changes to the styles, you need to rebuild the CSS file:
+
+```bash
+# Install Node.js dependencies (only needed once)
+npm install -D tailwindcss
+
+# Build the CSS file
+bin/build
+```
+
+This will process the Tailwind directives in `app/assets/stylesheets/modern_queue_dashboard.css` and output the compiled CSS to `app/assets/builds/modern_queue_dashboard.css`.
+
 ### Dummy Application
 
 The gem includes a dummy Rails application in `test/dummy` for integration testing and development:

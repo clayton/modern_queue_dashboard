@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.2.1] - 2023-07-30
+
+- Updated UI color scheme from indigo to sky blue
+- Fixed Tailwind CSS configuration and build process
+
 ## [0.2.0] - 2023-07-28
 
 - Added CI workflow with GitHub Actions

@@ -19,7 +19,7 @@
       <tbody class="bg-white divide-y divide-gray-200">
         <% @queues.each do |queue| %>
           <tr>
-            <td class="px-6 py-4 whitespace-nowrap font-medium text-indigo-600">
+            <td class="px-6 py-4 whitespace-nowrap font-medium text-sky-500">
               <%= link_to queue.name, queue_path(queue.name), data: { turbo_frame: "_top" } %>
             </td>
             <td class="px-6 py-4 text-right"><%= queue.pending %></td>

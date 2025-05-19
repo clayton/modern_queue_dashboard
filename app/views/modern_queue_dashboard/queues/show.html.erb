@@ -2,7 +2,7 @@
   <h1 class="text-3xl font-semibold">Modern Queue Dashboard</h1>
 
   <div class="flex items-center space-x-2 mb-4">
-    <%= link_to "← Back to Queues", queues_path, class: "text-indigo-600" %>
+    <%= link_to "← Back to Queues", queues_path, class: "text-sky-500" %>
   </div>
 
   <h2 class="text-2xl font-semibold">Queue: <%= @queue_name %></h2>
@@ -12,19 +12,19 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="bg-white shadow-sm rounded p-4">
         <p class="text-sm text-gray-500">Pending Jobs</p>
-        <p class="text-2xl font-bold text-indigo-600"><%= @queue.pending %></p>
+        <p class="text-2xl font-bold text-sky-500"><%= @queue.pending %></p>
       </div>
       <div class="bg-white shadow-sm rounded p-4">
         <p class="text-sm text-gray-500">Scheduled Jobs</p>
-        <p class="text-2xl font-bold text-indigo-600"><%= @queue.scheduled %></p>
+        <p class="text-2xl font-bold text-sky-500"><%= @queue.scheduled %></p>
       </div>
       <div class="bg-white shadow-sm rounded p-4">
         <p class="text-sm text-gray-500">Running Jobs</p>
-        <p class="text-2xl font-bold text-indigo-600"><%= @queue.running %></p>
+        <p class="text-2xl font-bold text-sky-500"><%= @queue.running %></p>
       </div>
       <div class="bg-white shadow-sm rounded p-4">
         <p class="text-sm text-gray-500">Failed Jobs</p>
-        <p class="text-2xl font-bold text-indigo-600"><%= @queue.failed %></p>
+        <p class="text-2xl font-bold text-sky-500"><%= @queue.failed %></p>
       </div>
     </div>
 
