@@ -16,8 +16,9 @@ Gem::Specification.new do |spec|
 
   # No private gem server – publish to RubyGems by default
 
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = spec.homepage
+  spec.metadata["homepage_uri"] = "https://github.com/clayton/modern_queue_dashboard"
+  spec.metadata["source_code_uri"] = "https://github.com/clayton/modern_queue_dashboard/tree/main"
+  spec.metadata["documentation_uri"] = "https://github.com/clayton/modern_queue_dashboard#readme"
   spec.metadata["changelog_uri"] = "https://github.com/clayton/modern_queue_dashboard/blob/main/CHANGELOG.md"
   spec.metadata["rubygems_mfa_required"] = "true"
 
@@ -27,7 +28,8 @@ Gem::Specification.new do |spec|
   spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
     ls.readlines("\x0", chomp: true).reject do |f|
       (f == gemspec) ||
-        f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile])
+        f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile node_modules/]) ||
+        f.include?("node_modules")
     end
   end
   spec.bindir = "exe"
@@ -40,10 +42,10 @@ Gem::Specification.new do |spec|
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
 
-  spec.add_dependency "rails", ">= 8.0.0"
-  spec.add_dependency "solid_queue", ">= 1.1"
-  spec.add_dependency "tailwindcss-rails", ">= 2.0"
-  spec.add_dependency "turbo-rails", ">= 1.5"
+  spec.add_dependency "rails", "~> 8.0", ">= 8.0.0"
+  spec.add_dependency "solid_queue", "~> 1.1"
+  spec.add_dependency "tailwindcss-rails", "~> 2.0"
+  spec.add_dependency "turbo-rails", "~> 1.5"
 
   # Development dependencies
   spec.add_development_dependency "minitest", "~> 5.18"

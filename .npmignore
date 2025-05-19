@@ -1,0 +1,25 @@
+# Ruby gem files
+*.gem
+*.gemspec
+Gemfile
+Gemfile.lock
+Rakefile
+bin/
+lib/
+test/
+app/
+config/
+docs/
+.ruby-version
+.yardoc
+.rubocop.yml
+
+# Other files
+.git/
+.github/
+.gitignore
+.DS_Store
+.rspec_status
+pkg/
+tmp/
+coverage/ 

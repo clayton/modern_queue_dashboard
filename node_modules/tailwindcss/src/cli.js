@@ -1,3 +1,7 @@
 #!/usr/bin/env node
 
-module.exports = require('./cli/index')
+if (__OXIDE__) {
+  module.exports = require('./oxide/cli')
+} else {
+  module.exports = require('./cli/index')
+}

@@ -6,6 +6,16 @@
 /pkg/
 /spec/reports/
 /tmp/
+/node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.DS_Store
+*.gem
+/test/dummy/tmp/
+/test/dummy/log/
+/test/dummy/db/*.sqlite3
+/test/dummy/db/*.sqlite3-*
 
 # rspec failure tracking
 .rspec_status
