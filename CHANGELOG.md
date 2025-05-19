@@ -1,6 +1,11 @@
 ## [Unreleased]
 
-## [0.4.0] - 2025-05-20
+## [0.4.1] - 2025-05-19
+
+- Fixed issue with jobs that have no arguments showing "Error parsing arguments"
+- Improved argument handling and display in job tables
+
+## [0.4.0] - 2025-05-19
 
 - Changed Tailwind's Sky color to Blue color for better contrast
 - Added jobs table to queue view showing up to 50 most recent jobs with their status
