@@ -14,6 +14,7 @@ jobs:
     strategy:
       matrix:
         ruby:
+          - '3.3.8'
           - '3.4.4'
 
     steps:
@@ -22,6 +23,10 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
+          bundler-cache: false # Don't use the cache to avoid frozen Gemfile issues
+      - name: Install dependencies
+        run: |
+          bundle config set --local frozen false
+          bundle install
       - name: Run the default task
         run: bundle exec rake

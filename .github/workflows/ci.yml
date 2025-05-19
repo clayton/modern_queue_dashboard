@@ -1,26 +1,28 @@
-name: CI
+name: Style
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.3.8
-        bundler-cache: true
+        bundler-cache: false
 
     - name: Install dependencies
-      run: bundle install
+      run: |
+        bundle config set --local frozen false
+        bundle install
 
-    - name: Run tests and Rubocop
-      run: bundle exec rake ci 
+    - name: Run RuboCop
+      run: bundle exec rubocop
