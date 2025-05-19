@@ -1,8 +1,12 @@
 # Modern Queue Dashboard
 
-A mountable Rails engine that provides a clean, Hotwire-powered dashboard **specifically designed for monitoring [Solid Queue](https://github.com/basecamp/solid_queue)** jobs. Built with Tailwind CSS, Turbo frames, and Stimulus controllers.
+A mountable Rails engine that provides a clean dashboard **specifically designed for monitoring [Solid Queue](https://github.com/basecamp/solid_queue)** jobs. Built with Tailwind CSS, Turbo frames, and Stimulus controllers.
 
 ![Dashboard Screenshot](screenshots/dashboard.png)
+
+## Why the "Modern Queue Dashboard"?
+
+I didn't want to give the impression that there is any association with Solid Queue and because this dashboard could be used with other job backends in the future.
 
 ## Features
 
@@ -77,18 +81,6 @@ class AuthenticatedConstraint
     user && user.admin?
   end
 end
-```
-
-### With HTTP Basic Auth
-
-```ruby
-# In config/routes.rb
-mount ModernQueueDashboard::Engine, at: "/queue-dashboard", constraints: lambda { |request|
-  ActiveSupport::SecurityUtils.secure_compare(
-    ::Digest::SHA256.hexdigest(request.headers["Authorization"].to_s),
-    ::Digest::SHA256.hexdigest("Basic #{Base64.encode64("username:password")}")
-  )
-}
 ```
 
 ## Configuration
