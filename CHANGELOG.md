@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.5.2] - 2025-01-07
+
+- Fixed pagy dependency specification to use semantic versioning best practices
+- Updated pagy dependency from ">= 7.0.0" to "~> 7.0", ">= 7.0.0" to eliminate gemspec warnings
+
 ## [0.5.1] - 2025-01-07
 
 - Fixed job details view to properly display error information for failed jobs
