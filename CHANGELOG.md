@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.5.3] - 2025-01-07
+
+- Updated pagy dependency specification to ">= 7.0.0", "< 10.0" for better version range control
+
 ## [0.5.2] - 2025-01-07
 
 - Fixed pagy dependency specification to use semantic versioning best practices
