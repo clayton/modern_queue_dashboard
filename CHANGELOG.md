@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [0.5.1] - 2025-01-07
+
+- Fixed job details view to properly display error information for failed jobs
+- Improved error message display and exception handling in job views
+- Enhanced job status display and error information accessibility
+
 ## [0.5.0] - 2025-05-20
 
 - Added job retry and discard functionality
