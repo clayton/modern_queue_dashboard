@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ModernQueueDashboard
-  JobStat = Struct.new(:id, :class_name, :queue_name, :arguments, :created_at, :status, :error, :exception_class, :backtrace, keyword_init: true)
+  JobStat = Struct.new(:id, :class_name, :queue_name, :arguments, :created_at, :status, :error, :exception_class, :backtrace, :finished_at, keyword_init: true)
 
   # Collection class for JobStat objects
   class JobStatCollection
@@ -186,6 +186,7 @@ module ModernQueueDashboard
           queue_name: job.queue_name,
           arguments: arguments_display,
           created_at: job.created_at,
+          finished_at: job.finished_at,
           status: status,
           error: raw_error,
           exception_class: nil,
