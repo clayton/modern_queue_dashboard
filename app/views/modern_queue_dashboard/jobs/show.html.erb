@@ -42,6 +42,12 @@
               <p class="text-sm text-gray-500">Created At</p>
               <p class="font-medium"><%= @job_stat.created_at.strftime('%Y-%m-%d %H:%M:%S') %></p>
             </div>
+            <% if @job_stat.finished_at %>
+              <div>
+                <p class="text-sm text-gray-500">Finished At</p>
+                <p class="font-medium"><%= @job_stat.finished_at.strftime('%Y-%m-%d %H:%M:%S') %></p>
+              </div>
+            <% end %>
           </div>
         </div>
         
@@ -98,5 +104,4 @@
       Job not found.
     </div>
   <% end %>
-</div> 
 </div> 
